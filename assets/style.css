@@ -1,0 +1,87 @@
+
+body {
+  background-color: #e0e0e0;
+  margin: 5%;
+}
+
+#title {
+  text-align: center;
+}
+
+.create_container2 {
+  border-radius: 15px;
+  background-color: #F2F2F2;
+  margin: 10px;
+  padding: 15px;
+  position: relative;
+  box-shadow: 4px 4px 4px 4px lightgrey;
+}
+
+.create_container {
+  border-radius: 15px;
+  background-color: #F2F2F2;
+  margin: 0 10px auto;
+  padding: 15px;
+  position: relative;
+  box-shadow: 4px 4px 4px 4px lightgrey;
+}
+
+.create_container1 {
+  margin: 0 auto;
+  }
+
+.dcc_compon {
+  margin: 0 auto;
+  padding: 5px;
+  width: calc(100%-40px);
+}
+
+.fix_label {
+  font-size: 20px;
+  margin: 0 auto;
+  padding: 10px;
+  padding-bottom: 0px;
+  margin-bottom: 0px;
+  width: calc(100%-40px);
+}
+
+.container-display {
+  display: flex;
+}
+
+#header {
+  align-items: center;
+}
+
+.flex-display {
+  display: flex;
+}
+
+#mainContainer {
+  display: flex;
+  flex-direction: column;
+}
+
+.rc-slider-track {
+  background-color: #3065C9;
+}
+
+.rc-slider-dot-active {
+  border-color: #3065C9;
+  border: solid 2px #3065C9;
+}
+
+.rc-slider-handle {
+  background-color: #3065C9;
+  border-color: #3065C9;
+}
+
+.rc.slider-handle:hover {
+  border-color: #3065C9;
+}
+
+.rc.slider-handle-active:active {
+  border-color: #3065C9;
+}
+
+
