@@ -26,21 +26,25 @@ app.layout = html.Div((
     html.Div([
 
          html.Div([
-             dcc.Graph(id = 'line_chart',
-                       config = {'displayModeBar': None}),
-
-         ], className = "create_container five columns", style = {'height': '133px', 'width': '725px', 'margin-left': '400px'}),
-
-         html.Div([
               html.Div(id='text1'),
 
-         ], className = "create_container two columns", style = {'text-align': 'center'}),
+         ], className = "create_container2 three columns"),
 
+         html.Div([
+             dcc.Graph(id = 'line_chart',
+                       config = {'displayModeBar': None}),
+         ], className = "create_container2 five columns", style = {'height': '133px'}), # change the height according to your screen resolution
 
          html.Div([
               html.Div(id='text2'),
 
-         ], className = "create_container two columns", style = {'text-align': 'center'}),
+         ], className = "create_container2 two columns"),
+
+
+         html.Div([
+              html.Div(id='text3'),
+
+         ], className = "create_container2 two columns"),
 
     ], className = "row flex-display"),
 
@@ -71,7 +75,7 @@ app.layout = html.Div((
             dcc.Graph(id = 'bar_chart',
                       config = {'displayModeBar': 'hover'}),
 
-        ], className = 'create_container2 five columns', style = {'width': '725px'}),
+        ], className = 'create_container2 five columns'),
 
         html.Div([
             dcc.Graph(id = 'pie_chart1',
@@ -82,6 +86,27 @@ app.layout = html.Div((
     ], className = "row flex-display"),
 
 ), id= "mainContainer", style={"display": "flex", "flex-direction": "column"})
+
+@app.callback(Output('text1', 'children'),
+              [Input('select_year', 'value')])
+def update_text(select_year):
+    poison8 = poison.groupby(['Year', 'Age'])['Deaths'].sum().reset_index()
+    poison9 = poison8[(poison8['Year'] == select_year) & (poison8['Age'] == '75+ years')]['Deaths'].sum()
+
+
+
+    return [
+               html.H6(children = '75+ Years (Age)',
+                       style={'textAlign': 'left',
+                              'color': 'rgb(50, 50, 50)'}
+                       ),
+
+               html.P('{0:,.0f}'.format(poison9),
+                      style={'textAlign': 'center',
+                             'color': '#3065C9',
+                             'fontSize': 30}
+                      ),
+            ]
 
 @app.callback(Output('line_chart', 'figure'),
               [Input('select_year', 'value')])
@@ -115,8 +140,7 @@ def update_graph(select_year):
 
 
         'layout': go.Layout(
-             height = 113,
-             width = 705,
+             height = 113,  # change the height according to your screen resolution
              plot_bgcolor='#F2F2F2',
              paper_bgcolor='#F2F2F2',
              title={
@@ -124,7 +148,7 @@ def update_graph(select_year):
 
                 'y': 0.96,
                 'x': 0.5,
-                'xanchor': 'center',
+                'xanchor': 'right',
                 'yanchor': 'top'},
              titlefont={
                         'color': 'rgb(50, 50, 50)',
@@ -184,7 +208,7 @@ def update_graph(select_year):
 
     }
 
-@app.callback(Output('text1', 'children'),
+@app.callback(Output('text2', 'children'),
               [Input('select_year', 'value')])
 def update_text(select_year):
     poison4 = poison.groupby(['Year'])['Deaths'].sum().reset_index()
@@ -194,7 +218,7 @@ def update_text(select_year):
 
     return [
                html.H6(children = 'Deaths by Drug Poisonings',
-                       style={'textAlign': 'center',
+                       style={'textAlign': 'left',
                               'color': 'rgb(50, 50, 50)'}
                        ),
 
@@ -205,7 +229,7 @@ def update_text(select_year):
                       ),
             ]
 
-@app.callback(Output('text2', 'children'),
+@app.callback(Output('text3', 'children'),
               [Input('select_year', 'value')])
 def update_text(select_year):
     poison6 = poison.groupby(['Year', 'Age'])['Deaths'].sum().reset_index()
@@ -215,7 +239,7 @@ def update_text(select_year):
 
     return [
                html.H6(children = 'Less than 15 years (Age)',
-                       style={'textAlign': 'center',
+                       style={'textAlign': 'left',
                               'color': 'rgb(50, 50, 50)'}
                        ),
 
